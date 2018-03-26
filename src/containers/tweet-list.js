@@ -10,7 +10,6 @@ class TweetList extends Component {
 		return this.props.tweets.map((tweet) => {
 			return (
 				<div className="list-group-item">
-					<img src={tweet.imagem} alt="placeholder"></img>
 					<li 
 						key={tweet.mensagem}
 						onClick={() => this.props.selectTweet(tweet)}

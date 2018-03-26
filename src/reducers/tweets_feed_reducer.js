@@ -8,6 +8,10 @@ export default function (state = [], action) {
 			return action.payload.data;
 	}
 	//um return default é obrigatorio
-	return state;
+	return [
+		{
+			mensagem: 'oi'
+		}
+	];
 }
 

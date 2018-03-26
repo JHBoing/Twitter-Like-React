@@ -45,7 +45,7 @@ class NovoTweet extends Component {
 						onChange={this.onInputChange}
 					>						
 					</textarea>
-					<span className="input-group-btn">
+					<span className="input-group-addon">
 						<button type="submit" className="btn btn-secondary">Enviar</button>
 					</span>
 				</form>
@@ -63,6 +63,6 @@ function mapStateToProps({ usuario }) {
 function mapDispatchToProps(dispatch) {
 	//Aciona a action enviarTweet e manda os dados
 	return bindActionCreators({ enviarTweet }, dispatch);
-
+}
 // Faz a conexao do componente(container) ao redux, mapeando os props e mandando para as actions
-export default connect(mapStateToProps, mapDispatchToProps)(TweetList);
+export default connect(mapStateToProps, mapDispatchToProps)(NovoTweet);

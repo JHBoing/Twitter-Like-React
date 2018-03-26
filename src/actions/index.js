@@ -13,6 +13,7 @@ export function enviarTweet(tweet, usuario) {
 		usuario: 'usuario.id'
 	})
 	//Apos o post completar, chama outra action para atualizar os tweets
+	//ja vi que deu certo
 	.then(function (response) {
 		dispatch(atualizaTweet(usuario));
 	});
