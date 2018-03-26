@@ -1,0 +1,46 @@
+#tela{
+	position: absolute;
+	background-color: grey;
+	width: 100%;
+	height: 100%;
+		box-shadow: 0px 0px 50px rgba(0,0,0,.5);
+
+
+}
+
+
+
+#form-login{	
+	position: absolute;
+	top: 40%;
+	left:  35%;
+
+}
+
+
+.form{
+	width: 300px;
+	
+	text-align: center;
+}
+
+#btn-login{
+	margin:20px 0 0 120px;
+}
+
+
+#cad-link{
+	position: absolute;
+	top:85%;
+	left: 35%;
+
+}
+
+#cad-link a{
+	color: white;
+	text-decoration: none;
+}
+
+#cad-link a:hover{
+	color:black;
+}
