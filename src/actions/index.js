@@ -10,15 +10,13 @@ export function enviarTweet(tweet, usuario) {
 	axios.post(url, {
 		//EXEMPLO, O que o backend vai precisar para este post?
 		mensagem: tweet,
-		usuario: 'usuario.id'
+		usuario: usuario
 	})
 	//Apos o post completar, chama outra action para atualizar os tweets
-	//ja vi que deu certo
 	.then(function (response) {
 		dispatch(atualizaTweet(usuario));
 	});
-
-	console.log(request);
+	
 	//sem payload?
 	return {
 		type: ENVIAR_TWEET
