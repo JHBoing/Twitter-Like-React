@@ -2,11 +2,13 @@ import React,{Component} from 'react';
 
 
 
+import Logo	from './Logoimg';
+
 
 import FormLogin from './formlogin';
 
 
-import FormCad	from './formcad';
+
 
 
 
@@ -18,7 +20,7 @@ class Login extends Component{
 		return(
 				
 				<div className="container" id="tela">
-				
+						<Logo/>
 						<FormLogin/>
 				</div>
 			);
