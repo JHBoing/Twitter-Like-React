@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectTweet } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
 class TweetList extends Component {
@@ -11,7 +10,6 @@ class TweetList extends Component {
 		return this.props.tweets.map((tweet) => {
 			return (
 				<div className="list-group-item">
-					<img src={tweet.imagem} alt="placeholder"></img>
 					<li 
 						key={tweet.mensagem}
 						onClick={() => this.props.selectTweet(tweet)}
@@ -41,11 +39,5 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	//Sempre que selectTweet é chamado(selectTweet: selectTweet), o resultado sera passado para todos
-	//os reducers (dispatch)
-	return bindActionCreators({ selectTweet: selectTweet }, dispatch);
-}
-
 // Faz a conexao do componente(container) ao redux, mapeando os props e mandando para as actions
-export default connect(mapStateToProps, mapDispatchToProps)(TweetList);
+export default connect(mapStateToProps)(TweetList);
