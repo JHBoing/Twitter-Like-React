@@ -33,7 +33,7 @@ class Navbar extends Component {
 			      				<Link to='/feed' className="nav-link">imagemLegal</Link>
 			      			</li>
 			      			<li className="nav-item dropdown">
-			      				<a className="nav-link dropdown-toggle" id="dropdownUsuario" data-toggle="dropdown" aria-haspopup="true" area-expanded="false">
+			      				<a className="nav-link dropdown-toggle" id="dropdownUsuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			      				{/*	{usuario} State que ganhara valor apos login do usuario */} PLACEHOLDER
 			      				</a>
 			      				<div className="dropdown-menu">

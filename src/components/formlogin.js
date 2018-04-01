@@ -20,7 +20,7 @@ class FormLogin extends Component {
 				</div>
 				<div className="row" id="cad-link">
 					<div className="col-xs-12 col-sm-12 col-md-12"> 
-						<a href="#">Sing in</a>&nbsp;|&nbsp;<a href="#">Forgot Password</a>						
+						<a href="#">Sign Up</a>&nbsp;|&nbsp;<a href="#">Forgot Password</a>						
 					</div>
 				</div>
 			</div>

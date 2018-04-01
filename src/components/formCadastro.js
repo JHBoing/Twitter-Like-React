@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 
-class FormCad extends Component {
+class FormCadastro extends Component {
 
 	render() {
 		return(
@@ -21,14 +21,14 @@ class FormCad extends Component {
 						</div>
 						<div className="form-group">
 							<label htmlFor="re-senha" className="form">	Re-Password:</label>
-							<input type='password'  className=" form form-control" id="re-senha" placeholder="*********" name="senha" ></input>
+							<input type='password'  className="form form-control" id="re-senha" placeholder="*********" name="senha" ></input>
 						</div>
 						<input type="submit" value="Register" id="btn-register"/>
 					</form>
 				</div>
 				<div className="row" id="login-link">
 					<div className="col-xs-12 col-sm-12 col-md-12"> 
-						<a href="#">Log in</a>						
+						<a href="#">Login</a>						
 					</div>
 				</div>
 			</div>

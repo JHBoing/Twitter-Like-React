@@ -1,14 +1,14 @@
 import React ,{Component} from 'react';
 
 import Logo	from './Logoimg';
-import Cad from './formcad';
+import FormCadastro from './formCadastro';
 
 class Cadastro extends Component{
 	render() {
 		return(
 			<div id="teste">	
 				<Logo/>
-				<Cad/>
+				<FormCadastro/>
 			</div>
 		);
 	}
