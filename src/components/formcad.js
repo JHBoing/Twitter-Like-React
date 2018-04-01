@@ -1,8 +1,6 @@
 import React , {Component} from 'react';
 
-
-class FormCad extends Component{
-
+class FormCad extends Component {
 
 	render() {
 		return(
