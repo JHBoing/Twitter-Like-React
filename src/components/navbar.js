@@ -30,16 +30,16 @@ class Navbar extends Component {
 			      	<div className="navbar-collapse collapsed pull-right" id="navbarTwitter">			      		
 			      		<ul className="navbar-nav">
 			      			<li className="nav-item imagem-usuario">
-			      				<a className="nav-link href=#"><Link to='/'>imagemLegal</Link></a>
+			      				<Link to='/feed' className="nav-link">imagemLegal</Link>
 			      			</li>
 			      			<li className="nav-item dropdown">
 			      				<a className="nav-link dropdown-toggle" id="dropdownUsuario" data-toggle="dropdown" aria-haspopup="true" area-expanded="false">
 			      				{/*	{usuario} State que ganhara valor apos login do usuario */} PLACEHOLDER
 			      				</a>
 			      				<div className="dropdown-menu">
-			      					<a className="dropdown-item"><Link to='/perfil'>Perfil</Link></a>
-			      					<a className="dropdown-item"><Link to='/conta'>Conta</Link></a>
-			      					<a className="dropdown-item"><Link to='/logout'>Sair</Link></a>
+			      					<Link to='/perfil' className="dropdown-item">Perfil</Link>
+			      					<Link to='/conta' className="dropdown-item">Conta</Link>
+			      					<Link to='/logout' className="dropdown-item">Sair</Link>
 			      				</div>
 			      			</li>
 			      		</ul>
