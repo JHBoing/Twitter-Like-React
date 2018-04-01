@@ -8,12 +8,11 @@ class FormLogin extends Component{
 	render(){
 		return( 
 
-			<div className="container">
-				<div className="row" id="form-login">
-					<div className="col-xs-12 col-sm-6 col-md-12">
+		<div className="row" id="form-login">
+					<div className="col-md-12">
 						<form  className="form-horizontal" >
 							<div className="form-group">
-								<label htmlFor="email" className='form'>	E-mail:</label>
+								<label htmlFor="email" className="form ">	E-mail:</label>
 								<input type='email'  className="form form-control" id="email" placeholder="Enter email" name="email"></input>
 							</div>
 							<div className="form-group">
@@ -24,26 +23,21 @@ class FormLogin extends Component{
 
 							<input type="submit" value="Login" id="btn-login"/>
 
+
+
 						</form>
 
 
 					</div>
 
-					
-				</div>
-
 				<div className="row" id="cad-link">
-					<div className="col-xs-12 col-sm-12 col-md-12">
-						
-							<a>Sign in</a><br/>
-							<a>esqueceu o a senha , esqueci como se escreve em inglês </a>
+					<div className="col-xs-12 col-sm-12 col-md-12"> 
+						<a href="#">Sing in</a>&nbsp;|&nbsp;<a href="#">Forgot Password</a>
 						
 					</div>
 				</div>
 
 			</div>
-
-
 
 			);
 

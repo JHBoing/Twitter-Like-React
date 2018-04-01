@@ -1,52 +1,41 @@
-import React,{Component} from 'react';
+import React , {Component} from 'react';
 
 
 class FormCad extends Component{
 
 
-
-	render(){
+	render() {
 		return(
-
-			<div className="row">
-				<div className="col-xs-12 col-sm-12 col-md-12">
-					<form className="form-inline" id="form-cad">
+			<div className="row" id="form-cad">
+				<div className="col-md-12">
+					<form  className="form-horizontal" >
 						<div className="form-group">
-							<label htmlFor="nome" className='control-label'>	Nome:</label>
-							<input type='text'  className="formcad form-control" id="nome" placeholder="Nome" name="nome"></input>
+							<label htmlFor="Nome" className='form'>	Nome:</label>
+							<input type="text" className="form form-control" id="nome" placeholder="Nome"></input>
 						</div>
-
 						<div className="form-group">
-							<label htmlFor="email" className='control-label'>	E-mail:</label>
-							<input type='email'  className="formcad form-control" id="emailcad" placeholder="Enter email" name="email"></input>
+							<label htmlFor="email" className="form ">	E-mail:</label>
+							<input type='email'  className="form form-control" id="email" placeholder="Enter E-mail" name="email"></input>
 						</div>
-
 						<div className="form-group">
-							<label htmlFor="senhacad" className="control-label">	Password:</label>
-							<input type='password'  className=" formcad form-control" id="senhacad" placeholder="*******" name="senha" ></input>
+							<label htmlFor="senha" className="form">	Password:</label>
+							<input type='password'  className=" form form-control" id="senha" placeholder="*********" name="senha" ></input>
 						</div>
-
 						<div className="form-group">
-							<label htmlFor="senhacad2" className="control-label">	Re-Password:</label>
-							<input type='password'  className=" formcad form-control" id="senhacad2" placeholder="*******" name="senha" ></input>
+							<label htmlFor="re-senha" className="form">	Re-Password:</label>
+							<input type='password'  className=" form form-control" id="re-senha" placeholder="*********" name="senha" ></input>
 						</div>
-						
-						<input type="submit" value="Regiter" id ="button"/>
-							
+						<input type="submit" value="Register" id="btn-register"/>
 					</form>
-
-		</div>
-		</div>
-
-			
-
-
-
-			);
-
-
+				</div>
+				<div className="row" id="login-link">
+					<div className="col-xs-12 col-sm-12 col-md-12"> 
+						<a href="#">Log in</a>						
+					</div>
+				</div>
+			</div>
+		);
 	}
-
 }
 
 export default FormCad;
