@@ -15,7 +15,7 @@ class SearchBar extends Component {
 		return (
 			<div>
 				<input 
-				className="form-control input-lg"
+				className="form-control input-group"
 				placeholder="Pesquisa"
 				value = {this.state.term}
 				onChange={event => this.setState({ term: event.target.value })}

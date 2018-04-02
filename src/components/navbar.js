@@ -17,7 +17,7 @@ class Navbar extends Component {
 	render() {
 		return (
 			<div>
-				<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+				<nav className="navbar navbar-expand-lg navbar bg-light">
 					<a className="navbar-brand">
 						{/* <!--imagem--> Olha a doença que é fazer um comentario dentro do JSX*/}
 						Twitter
