@@ -1,14 +1,20 @@
 import axios from 'axios';
 
+//TYPE DISPATCH
 export const ENVIAR_TWEET = 'ENVIAR_TWEET';
 export const ATUALIZAR_TWEETS = 'ATUALIZAR_TWEETS';
+export const AUTENTICADO = 'AUTENTICADO';
+export const NAO_AUTENTICADO = 'NAO_AUTENTICADO';
+export const ERRO_AUTENTICACAO = 'ERRO_AUTENTICACAO';
+//URL API
+export const URL_LOGIN = 'localhost/api/login';
+export const URL_GET_TWEETS = 'localhost/api/user/posts';
 
 export function enviarTweet(tweet, usuario) {
-	//Por aqui o URL para post de novo tweet na api
-	const url = `urlbacana`;
 	//realiza o post, quais sao as informações interessantes pra gente?
-	axios.post(url, {
+	axios.post(URL_GET_TWEETS, {
 		//EXEMPLO, O que o backend vai precisar para este post?
+		//falta header(jwt)
 		mensagem: tweet,
 		usuario: usuario
 	})
@@ -33,6 +39,22 @@ export function atualizaTweet(usuario) {
 		type: ATUALIZAR_TWEETS,
 		payload: request
 	}
+}
+
+export function signInAction({ email, password }, history) {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(`${URL_LOGIN}`, { email, password});
+			dispatch({ type: AUTENTICADO });
+			localStorage.setItem('user_token', res.data.token);
+			history.push('/feed');
+		} catch(error) {
+			dispatch({
+				type: ERRO_AUTENTICACAO,
+				payload: 'Erro ao logar'
+			});
+		}
+	};
 }
 
 
