@@ -15,10 +15,6 @@ export default function (ComposedComponent) {
       }
     }
 
-    PropTypes = {
-      router: PropTypes.object,
-    }
-
     render() {
       return <ComposedComponent {...this.props} />;
     }

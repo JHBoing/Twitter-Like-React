@@ -7,11 +7,10 @@ class TweetList extends Component {
 	//A propria mensagem pode servir provisoriamente como key até ter dados reais
 	//pega o props(que é um array) e mapeia(como se fosse um for iterando ele)
 	renderTweetList() {
-		return this.props.tweets.map((tweet) => {
+		return this.props.tweets.map((tweet, index) => {
 			return (
-				<div className="list-group-item">
+				<div className="list-group-item" key={index}>
 					<li 
-						key={tweet.mensagem}
 						onClick={() => this.props.selectTweet(tweet)}
 					>{tweet.mensagem}</li>
 				</div>

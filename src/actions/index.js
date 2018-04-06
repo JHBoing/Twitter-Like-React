@@ -8,21 +8,25 @@ export const NAO_AUTENTICADO = 'NAO_AUTENTICADO';
 export const ERRO_AUTENTICACAO = 'ERRO_AUTENTICACAO';
 //URL API
 export const URL_LOGIN = 'localhost/api/login';
+export const URL_CADASTRO = 'localhost/api/register';
 export const URL_GET_TWEETS = 'localhost/api/user/posts';
 
 export function enviarTweet(tweet, usuario) {
-	//realiza o post, quais sao as informações interessantes pra gente?
-	axios.post(URL_GET_TWEETS, {
-		//EXEMPLO, O que o backend vai precisar para este post?
-		//falta header(jwt)
-		mensagem: tweet,
-		usuario: usuario
-	})
-	//Apos o post completar, chama outra action para atualizar os tweets
-	.then(function (response) {
-		dispatch(atualizaTweet(usuario));
-	});
 	
+	return function (dispatch) {
+		//realiza o post, quais sao as informações interessantes pra gente?
+		dispatch(atualizaTweet(usuario));
+		axios.post(URL_GET_TWEETS, {
+			//EXEMPLO, O que o backend vai precisar para este post?
+			//falta header(jwt)
+			mensagem: tweet,
+			usuario: usuario
+		})
+		//Apos o post completar, chama outra action para atualizar os tweets
+		.then(function (response) {
+			dispatch(atualizaTweet(usuario));
+		});
+	}
 	//sem payload?
 	return {
 		type: ENVIAR_TWEET
@@ -41,13 +45,13 @@ export function atualizaTweet(usuario) {
 	}
 }
 
-export function signInAction({ email, password }, history) {
+export function signInAction({ email, password }) {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(`${URL_LOGIN}`, { email, password});
 			dispatch({ type: AUTENTICADO });
 			localStorage.setItem('user_token', res.data.token);
-			history.push('/feed');
+			//history.push('/feed');
 		} catch(error) {
 			dispatch({
 				type: ERRO_AUTENTICACAO,
@@ -57,6 +61,24 @@ export function signInAction({ email, password }, history) {
 	};
 }
 
+export function signUpAction(user) {
+	console.log(
+		user
+	);
+	return async (dispatch) => {
+		try {
+			const request = await axios.post(`${URL_CADASTRO}`, user)
+		} catch (error) {
+			dispatch({
+				type: "NAO_ARRASOU"
+			});
+		}
+	}
+
+	return {
+		type: "ARRASOU"
+	}
+}
 
 /* 
 Exemplo de um post. Devemos usar middleware ou .then?

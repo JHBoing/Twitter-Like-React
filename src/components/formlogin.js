@@ -1,83 +1,85 @@
 import React, {Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { signInAction }  from '../actions/index.js';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class FormLogin extends Component {
 
 	constructor(props) {
 		super(props);
 
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		this.state = {
+            email: '',
+            password: '',
+            submitted: false
+        };
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 		
-	handleFormSubmit(props) {
-    	this.props.signInAction(props, this.props.history);
-  	}
+	handleChange(event) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
 
-	errorMessage() {
-		if (this.props.errorMessage) {
-			return (
-				<div className="info-red">
-					{this.props.errorMessage}
-				</div>
-			);
-		}
-	}
+    handleSubmit(event) {
+        event.preventDefault();
 
-	render(){
-		const { handleSubmit } = this.props;
+        this.setState({ submitted: true });
+        const { email, password } = this.state;
+        const { dispatch } = this.props;
+        if (email && password) {
+            this.props.signInAction(email, password);
+        }
+    }
+
+	render() {
+		const { loggingIn } = this.props;
+        const { email, password, submitted } = this.state;
+
 		return ( 
 			<div className="row" id="form-login">
 				<div className="col-md-12">
-					<form  className="form-horizontal" onSubmit={ handleSubmit(this.submit) }>
-						<Field name="email"
-							component="input"
-							type="text"
-							placeholder="Email"
-						/>
-						<Field name="password"
-							component="input"
-							type="password"
-							placeholder="Password"
-						/>
-						<button type="submit" value="Login" id="btn-login">Sign in</button>
+					<form className="form-horizontal" onSubmit={this.handleFormSubmit} >
+						<div className="form-group">
+							<label htmlFor="email" className='form'>Nome:</label>
+							<input type="text"
+								className="form-control"
+								name="email"
+								value={email}
+								onChange={this.handleChange}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="password" className='form'>Senha:</label>
+							<input type="password"
+								className="form-control"
+								name="password"
+								value={password}
+								onChange={this.handleChange}
+							/>
+						</div>
+						<div>
+							<button type="submit" className="btn btn-info" value="login" id="btn-login">Login</button>
+							<Link to="/signup" className="btn btn-info" id="btn-login">Cadastro</Link>	
+						</div>
 					</form>
-				</div>
-				<div className="row" id="cad-link">
-					<div className="col-xs-12 col-sm-12 col-md-12"> 
-						<a href="#">Sign Up</a>&nbsp;|&nbsp;<a href="#">Forgot Password</a>						
-					</div>
 				</div>
 			</div>
 		);
 	}
 }
-/*
-export default reduxForm({
-	form: 'login'
-})(FormLogin);
-*/
+
 
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
+function mapDispatchToProps(dispatch) {
+	//Aciona a action enviarTweet e manda os dados
+	return bindActionCreators({ enviarTweet }, dispatch);
+}
 
-const reduxFormLogin = reduxForm({
- 	form: 'login'
-})(FormLogin);
-
-export default connect(mapStateToProps, {signInAction})(reduxFormLogin);
-
-
-/* <div className="form-group">
-							<label htmlFor="email" className="form ">E-mail:</label>
-							<input type='email'  className="form form-control" id="email" placeholder="Enter email" name="email"></input>
-						</div>
-						<div className="form-group">
-							<label htmlFor="senha" className="form">Password:</label>
-							<input type='password'  className=" form form-control" id="senha" placeholder="*******" name="senha" ></input>
-						</div>
-						*/
+export default connect(mapStateToProps, {signInAction})(FormLogin);
