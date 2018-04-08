@@ -30,7 +30,7 @@ if (token) {
 
 ReactDOM.render(
 	<Provider store={createStoreWithMiddleware(reducers)}>
-		<HashRouter>
+		<HashRouter history={history}>
 	  		<div>
 	  			<Switch>
 	  				<Route path="/feed" component={Feed} />

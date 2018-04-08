@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { signUpAction } from '../actions/index.js';
 
@@ -10,6 +9,7 @@ class FormCadastro extends Component {
 		this.state = {
             user: {
                 name: '',
+                username: '',
                 email: '',
                 password: ''
            	},
@@ -19,6 +19,7 @@ class FormCadastro extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	//Sempre que um campo mudar, modifica o state equivalente
 	handleChange(event) {
         const { name, value } = event.target;
         const { user } = this.state;
@@ -30,14 +31,20 @@ class FormCadastro extends Component {
         });
     }
 
+    //Envia os dados pras action creators
     handleSubmit(event) {
         event.preventDefault();
 
         this.setState({ submitted: true });
         const { user } = this.state;
-        const { dispatch } = this.props;
         if (user.name && user.email && user.password) {
             this.props.signUpAction(user);
+            this.setState({
+	            user: {
+	                ...user,
+	                [name]: '',
+	            }
+        	});
         }
     }
 
@@ -58,6 +65,21 @@ class FormCadastro extends Component {
 								value={user.name}
 								onChange={this.handleChange}
 							/>
+							{submitted && !user.name &&
+								<div className="help-block text-danger">O nome é necessario.</div>
+							}
+						</div>
+						<div className="form-group">
+							<label htmlFor="username" className='form'>	Username:</label>
+							<input type="text"
+								className="form-control"
+								name="username"
+								value={user.username}
+								onChange={this.handleChange}
+							/>
+							{submitted && !user.username &&
+								<div className="help-block text-danger">O username é necessario.</div>
+							}
 						</div>
 						<div className="form-group">
 							<label htmlFor="email" className="form ">	E-mail:</label>
@@ -67,6 +89,9 @@ class FormCadastro extends Component {
 								value={user.email}
 								onChange={this.handleChange}
 							/>
+							{submitted && !user.email &&
+								<div className="help-block text-danger">O email é necessario.</div>
+							}
 						</div>
 						<div className="form-group">
 							<label htmlFor="password" className="form">	Password:</label>
@@ -76,6 +101,9 @@ class FormCadastro extends Component {
 								value={user.password}
 								onChange={this.handleChange}
 							/>
+							{submitted && !user.password &&
+								<div className="help-block text-danger">A senha é necessaria.</div>
+							}
 						</div>
 						<input type="submit" className="btn btn-success" value="Register" id="btn-register"/>
 					</form>
@@ -91,15 +119,14 @@ class FormCadastro extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-	errorMessage: state.auth.error,
-	sucessMessage: state.auth.sucess
+ 	return {
+		errorMessage: state.auth.error,
    	};
 }
 
 function mapDispatchToProps(dispatch) {
 	//Aciona a action enviarTweet e manda os dados
-	return bindActionCreators({ enviarTweet }, dispatch);
+	return bindActionCreators({ signUpAction }, dispatch);
 }
 
 export default connect(mapStateToProps, {signUpAction})(FormCadastro);

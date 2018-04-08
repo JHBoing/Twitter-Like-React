@@ -9,8 +9,10 @@ class FormLogin extends Component {
 		super(props);
 
 		this.state = {
-            email: '',
-            password: '',
+            user: {
+            	email: '',
+            	password: ''
+            },
             submitted: false
         };
 
@@ -19,50 +21,62 @@ class FormLogin extends Component {
 	}
 		
 	handleChange(event) {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
+        const { name, value } = event.target;
+        const { user } = this.state;
+        this.setState({
+            user: {
+                ...user,
+                [name]: value
+            }
+        });
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
         this.setState({ submitted: true });
-        const { email, password } = this.state;
-        const { dispatch } = this.props;
-        if (email && password) {
-            this.props.signInAction(email, password);
+        const { user } = this.state;
+        if (user.email && user.password) {
+            this.props.signInAction(user);
         }
     }
 
 	render() {
 		const { loggingIn } = this.props;
-        const { email, password, submitted } = this.state;
+        const { user, submitted } = this.state;
 
 		return ( 
-			<div className="row" id="form-login">
-				<div className="col-md-12">
-					<form className="form-horizontal" onSubmit={this.handleFormSubmit} >
+			<div>
+				<div className="signin">
+					<form className="form-signin" onSubmit={this.handleSubmit} >
+					<h1>Login</h1>
 						<div className="form-group">
-							<label htmlFor="email" className='form'>Nome:</label>
+							<label htmlFor="email">Email:</label>
 							<input type="text"
 								className="form-control"
 								name="email"
-								value={email}
+								value={user.email}
 								onChange={this.handleChange}
 							/>
+							{submitted && !user.email &&
+								<div className="help-block text-danger">O email é necessario.</div>
+							}
 						</div>
 						<div className="form-group">
-							<label htmlFor="password" className='form'>Senha:</label>
+							<label htmlFor="password">Senha:</label>
 							<input type="password"
 								className="form-control"
 								name="password"
-								value={password}
+								value={user.password}
 								onChange={this.handleChange}
 							/>
+							{submitted && !user.password &&
+								<div className="help-block text-danger">A senha é necessaria.</div>
+							}
 						</div>
 						<div>
-							<button type="submit" className="btn btn-info" value="login" id="btn-login">Login</button>
-							<Link to="/signup" className="btn btn-info" id="btn-login">Cadastro</Link>	
+							<button type="submit" className="btn btn-info" value="login">Login</button>&nbsp;
+							<Link to="/signup" className="btn btn-info">Cadastro</Link>	
 						</div>
 					</form>
 				</div>
@@ -78,8 +92,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	//Aciona a action enviarTweet e manda os dados
-	return bindActionCreators({ enviarTweet }, dispatch);
+	console.log(dispatch);
+	return bindActionCreators({ signInAction }, dispatch);
 }
 
 export default connect(mapStateToProps, {signInAction})(FormLogin);

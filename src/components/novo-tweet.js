@@ -45,8 +45,8 @@ class NovoTweet extends Component {
 						onChange={this.onInputChange}
 					>						
 					</textarea>
-					<span className="input-group-addon">
-						<button type="submit" className="btn btn-secondary">Enviar</button>
+					<span className="input-group-append">
+						<button type="submit" className="btn btn-success">Enviar</button>
 					</span>
 				</form>
 			</div>
