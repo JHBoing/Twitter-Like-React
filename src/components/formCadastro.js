@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import { connect } from 'react-redux';
 import { signUpAction } from '../actions/index.js';
+import { bindActionCreators } from 'redux';
 
 class FormCadastro extends Component {
 
@@ -49,7 +50,7 @@ class FormCadastro extends Component {
     }
 
 	render() {
-		const { registering  } = this.props;
+		const errorMessage = this.props;
         const { user, submitted } = this.state;
 
 		return (
@@ -83,7 +84,7 @@ class FormCadastro extends Component {
 						</div>
 						<div className="form-group">
 							<label htmlFor="email" className="form ">	E-mail:</label>
-							<input type="text"
+							<input type="email"
 								className="form-control"
 								name="email"
 								value={user.email}
@@ -104,11 +105,16 @@ class FormCadastro extends Component {
 							{submitted && !user.password &&
 								<div className="help-block text-danger">A senha é necessaria.</div>
 							}
+							
 						</div>
+						{submitted && errorMessage &&
+								<div className="help-block text-danger">Erro ao realizar o cadastro.</div>
+						}
 						<input type="submit" className="btn btn-success" value="Register" id="btn-register"/>
 					</form>
 				</div>
-				<div className="row" id="login-link">
+				<br/>
+				<div className="row" id="login-link" style={{padding:'10px'}}>
 					<div className="col-xs-12 col-sm-12 col-md-12"> 
 						<button className="btn btn-info">Voltar</button>						
 					</div>
@@ -119,9 +125,11 @@ class FormCadastro extends Component {
 }
 
 function mapStateToProps(state) {
- 	return {
-		errorMessage: state.auth.error,
-   	};
+	if (state.auth.error) {
+		const errorMessage = state.auth.error;
+		return errorMessage;
+	}
+ 	return state;
 }
 
 function mapDispatchToProps(dispatch) {

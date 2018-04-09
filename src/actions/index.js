@@ -7,6 +7,8 @@ export const ATUALIZAR_TWEETS = 'ATUALIZAR_TWEETS';
 export const AUTENTICADO = 'AUTENTICADO';
 export const NAO_AUTENTICADO = 'NAO_AUTENTICADO';
 export const ERRO_AUTENTICACAO = 'ERRO_AUTENTICACAO';
+export const ERRO_CADASTRO = 'ERRO_CADASTRO';
+export const LOGOUT = 'LOGOUT';
 //URL API
 export const URL_LOGIN = 'http://localhost/api/login';
 export const URL_CADASTRO = 'http://localhost/api/user';
@@ -61,7 +63,6 @@ export function signInAction(user) {
 	console.log(user);
 	return async (dispatch) => {
 		try {
-			console.log("entrou");
 			const res = await axios.post(`${URL_LOGIN}`, user)
 			.then(function (response) {
 				history.push('/feed');
@@ -69,28 +70,24 @@ export function signInAction(user) {
 			})
 			.catch(function (error) {
 				console.log(error);
+				dispatch({
+					type: ERRO_AUTENTICACAO,
+					payload: 'Erro ao logar'
+				})
 			});
-			console.log(res.data);
-			dispatch({ type: AUTENTICADO });
-			localStorage.setItem('user', res.data.access_token);
-			let token = localStorage.getItem('user');
-			if (token) {
-				console.log('tem token salvo');
-			}
-			
+			localStorage.setItem('user', res.data.access_token);			
 		} catch(error) {
 			dispatch({
 				type: ERRO_AUTENTICACAO,
-				payload: 'Erro ao logar'
+				payload: {
+					erro: 'Erro ao logar'
+				}
 			});
 		}
 	};
 }
 
 export function signUpAction(user) {
-	console.log(
-		user
-	);
 	return async (dispatch) => {
 		try {
 			const request = await axios.post(`${URL_CADASTRO}`, user)
@@ -102,9 +99,20 @@ export function signUpAction(user) {
 			});			
 		} catch (error) {
 			dispatch({
-				type: "ERRO_CADASTRO"
+				type: "ERRO_CADASTRO",
+				payload: {
+					erro: 'Erro ao cadastrar'
+				}
 			});
 		}
+	}
+}
+
+export function logoutAction() {
+	return async( dispatch) => {
+		localStorage.clear();
+		history.push("/");
+		dispatch({type: LOGOUT});
 	}
 }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { signInAction }  from '../actions/index.js';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 class FormLogin extends Component {
 
@@ -42,7 +43,7 @@ class FormLogin extends Component {
     }
 
 	render() {
-		const { loggingIn } = this.props;
+		const errorMessage = this.props;
         const { user, submitted } = this.state;
 
 		return ( 
@@ -74,6 +75,9 @@ class FormLogin extends Component {
 								<div className="help-block text-danger">A senha é necessaria.</div>
 							}
 						</div>
+						{submitted && errorMessage &&
+								<div className="help-block text-danger">Erro ao realizar o login.</div>
+						}
 						<div>
 							<button type="submit" className="btn btn-info" value="login">Login</button>&nbsp;
 							<Link to="/signup" className="btn btn-info">Cadastro</Link>	
@@ -88,7 +92,11 @@ class FormLogin extends Component {
 
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+	if (state.auth.error) {
+		const errorMessage = state.auth.error;
+		return errorMessage;
+	}
+ 	return state;
 }
 
 function mapDispatchToProps(dispatch) {

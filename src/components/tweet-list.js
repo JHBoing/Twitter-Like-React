@@ -13,7 +13,7 @@ class TweetList extends Component {
 		return this.props.tweets.map((post, index) => {
 			return (
 				<div className="list-group-item" key={index}>
-					<li>{post}</li>
+					<li>mensagem</li>
 				</div>
 			);
 		});
