@@ -1,32 +1,41 @@
 import React , {Component} from 'react';
 import { connect } from 'react-redux';
-import { signUpAction } from '../actions/index.js';
+import { getConta, atualizaConta } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
-import { history } from '../helpers/history.js';
+import { Link } from 'react-router-dom';
 
-class FormCadastro extends Component {
-
-
+class FormConta extends Component {
 
 	constructor(props) {
 		super(props);
-		const token = localStorage.getItem('user');
-
-		if (token) {
-			history.push('/feed');
-		}
-
 		this.state = {
             user: {
                 name: '',
                 username: '',
                 email: '',
-                password: ''
+                password: '',
+                id: ''
            	},
            	submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentWillMount() {
+		this.props.getConta();
+	}
+
+	componentWillReceiveProps(props) {
+		console.log(props.user);
+		this.setState({
+			user: {
+				name: props.usuario.name,
+				username: props.usuario.username,
+				email: props.usuario.email,
+				id: props.usuario.id
+			}
+		});
 	}
 
 	//Sempre que um campo mudar, modifica o state equivalente
@@ -47,14 +56,8 @@ class FormCadastro extends Component {
 
         this.setState({ submitted: true });
         const { user } = this.state;
-        if (user.name && user.email && user.password) {
-            this.props.signUpAction(user);
-            this.setState({
-	            user: {
-	                ...user,
-	                [name]: '',
-	            }
-        	});
+        if (user.name && user.username && user.email) {
+            this.props.atualizaConta(user);
         }
     }
 
@@ -65,7 +68,7 @@ class FormCadastro extends Component {
 		return (
 			<div className="row" id="form-cad">
 				<div className="col-md-12">
-					<h1> Cadastro </h1>
+					<h1> Editar Conta </h1>
 					<form  className="form-horizontal"onSubmit={this.handleSubmit}>
 						<div className="form-group">
 							<label htmlFor="name" className='form'>	Nome:</label>
@@ -103,29 +106,13 @@ class FormCadastro extends Component {
 								<div className="help-block text-danger">O email é necessario.</div>
 							}
 						</div>
-						<div className="form-group">
-							<label htmlFor="password" className="form">	Password:</label>
-							<input type="password"
-								className="form-control"
-								name="password"
-								value={user.password}
-								onChange={this.handleChange}
-							/>
-							{submitted && !user.password &&
-								<div className="help-block text-danger">A senha é necessaria.</div>
-							}
-							
-						</div>
-						{submitted && errorMessage &&
-								<div className="help-block text-danger">Erro ao realizar o cadastro.</div>
-						}
-						<input type="submit" className="btn btn-success" value="Registrar" id="btn-register"/>
+						<input type="submit" className="btn btn-success" value="Editar" id="btn-register"/>
 					</form>
 				</div>
 				<br/>
 				<div className="row" id="login-link" style={{padding:'10px'}}>
 					<div className="col-xs-12 col-sm-12 col-md-12"> 
-						<button className="btn btn-info">Voltar</button>						
+						<Link to='/feed' className="btn btn-info">Voltar</Link>						
 					</div>
 				</div>
 			</div>
@@ -134,16 +121,14 @@ class FormCadastro extends Component {
 }
 
 function mapStateToProps(state) {
-	if (state.auth.error) {
-		const errorMessage = state.auth.error;
-		return errorMessage;
-	}
- 	return state;
+ 	return {
+ 		usuario: state.user
+ 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	//Aciona a action enviarTweet e manda os dados
-	return bindActionCreators({ signUpAction }, dispatch);
+	return bindActionCreators({getConta, atualizaConta}, dispatch);
 }
 
-export default connect(mapStateToProps, {signUpAction})(FormCadastro);
+export default connect(mapStateToProps, {getConta, atualizaConta})(FormConta);

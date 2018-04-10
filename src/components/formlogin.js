@@ -53,7 +53,7 @@ class FormLogin extends Component {
 					<h1>Login</h1>
 						<div className="form-group">
 							<label htmlFor="email">Email:</label>
-							<input type="text"
+							<input type="email"
 								className="form-control"
 								name="email"
 								value={user.email}
@@ -75,9 +75,6 @@ class FormLogin extends Component {
 								<div className="help-block text-danger">A senha é necessaria.</div>
 							}
 						</div>
-						{submitted && errorMessage &&
-								<div className="help-block text-danger">Erro ao realizar o login.</div>
-						}
 						<div>
 							<button type="submit" className="btn btn-info" value="login">Login</button>&nbsp;
 							<Link to="/signup" className="btn btn-info">Cadastro</Link>	

@@ -4,16 +4,12 @@ import { bindActionCreators } from 'redux';
 import { atualizaTweet } from '../actions/index';
 
 class TweetList extends Component {
-	//Key pode ser o id? O que pode servir como key? A key tem que ser unica
-	//A propria mensagem pode servir provisoriamente como key até ter dados reais
-	//pega o props(que é um array) e mapeia(como se fosse um for iterando ele)
 
 	renderTweetList() {
-		console.log(this.props.tweets[0]);
-		return this.props.tweets.map((post, index) => {
+		return this.props.tweets.map((tweets, index) => {
 			return (
 				<div className="list-group-item" key={index}>
-					<li>mensagem</li>
+					<li>{tweets.post}</li>
 				</div>
 			);
 		});
