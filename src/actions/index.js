@@ -111,7 +111,6 @@ export function logoutAction() {
 }
 
 export function getConta() {
-	console.log("entrou");
 	return async(dispatch) => {
 		let token = localStorage.getItem('user');
 		return async function(dispatch) {
@@ -128,7 +127,6 @@ export function getConta() {
 }
 
 export function atualizaConta(user) {
-	console.log("entrou no atualiza conta");
 	return async(dispatch) => {
 		let token = localStorage.getItem('user');
 		return async function(dispatch) {

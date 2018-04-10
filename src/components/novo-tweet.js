@@ -39,7 +39,7 @@ class NovoTweet extends Component {
 					<textarea
 						rows="4"
 						cols="50"
-						placeholder="Aprender React é divertido, comente sobre: "
+						placeholder="Digite algo: "
 						className="form-control"
 						value={this.state.texto}
 						onChange={this.onInputChange}
